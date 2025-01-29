@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 class PrincipalController extends Controller
 {
     public function principal(){
-        return view('site.principal', ['titulo' => 'Principal']);
+        $motivo_contato = [
+            '1' => 'Dúvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação'
+        ];
+
+        return view('site.principal', ['titulo' => 'Principal', 'motivo_contato' => $motivo_contato]);
     }
 
 }
