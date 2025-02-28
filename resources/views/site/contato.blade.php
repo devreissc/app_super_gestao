@@ -1,10 +1,8 @@
 @extends('site.layouts.basico')
 
-{{-- @section('titulo', 'Contato') --}}
 @section('titulo', $titulo)
 
 @section('conteudo')
-    {{-- @include('site.layouts._partials.topo') --}}
     <div class="conteudo-pagina">
         <div class="titulo-pagina">
             <h1>Entre em contato conosco</h1>
@@ -12,13 +10,30 @@
 
         <div class="informacao-pagina">
             <div class="contato-principal">
-                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', 'motivo_contato' => $motivo_contato])
-                    <p>A nossa equipe retornará o mais rápido possível!</p>
-                    <p>O nosso tempo médio de resposta é de 48 horas.</p>
+                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', 'motivo_contatos' => $motivo_contatos])
+                    <p>A nossa equipe analisará a sua mensagem e retornaremos o mais brevemente possível</p>
+                    <p>Nosso tempo médio de resposta é de 48 horas</p>
                 @endcomponent
             </div>
-        </div>  
+        </div>
     </div>
 
-    @include('site.layouts._partials.rodape')
+    <div class="rodape">
+        <div class="redes-sociais">
+            <h2>Redes sociais</h2>
+            <img src="{{ asset('img/facebook.png') }}">
+            <img src="{{ asset('img/linkedin.png') }}">
+            <img src="{{ asset('img/youtube.png') }}">
+        </div>
+        <div class="area-contato">
+            <h2>Contato</h2>
+            <span>(11) 3333-4444</span>
+            <br>
+            <span>supergestao@dominio.com.br</span>
+        </div>
+        <div class="localizacao">
+            <h2>Localização</h2>
+            <img src="{{ asset('img/mapa.png') }}">
+        </div>
+    </div>
 @endsection

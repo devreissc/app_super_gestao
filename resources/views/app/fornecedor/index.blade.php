@@ -1,103 +1,30 @@
-<h3>Fornecedor</h3>
+@extends('app.layouts.basico')
 
-{{-- Incluindo o componente de listagem de fornecedores --}}
+@section('titulo', 'Fornecedor')
 
-{{-- @php
-    if(){
-        # code...
-    }elseif (condition) {
-        # code...
-    }else{
-        # code...
-    }
-@endphp --}}
-
-{{-- @dd($fornecedores); --}}
-
-{{-- @isset($fornecedores)
-    @if(count($fornecedores) > 0 && count($fornecedores) < 10)
-        <h3>Existem fornecedores</h3>
-    @elseif(count($fornecedores) > 10)
-        <h3>Existem muitos fornecedores</h3>
-    @else
-        <h3>Não existem fornecedores</h3>
-    @endif
-
-    Fornecedor: {{ $fornecedores[0]['nome'] }}
-    <br>
-    Status: {{ $fornecedores[0]['status'] }}
-    <br>
-    CNPJ: {{ $fornecedores[0]['cnpj'] }}
-
-    @if($fornecedores[0]['status'] == 'N')
-        <h3>Inativo</h3>
-    @endif
-
-    @unless($fornecedores[0]['status'] == 'A')
-        <h3>Inativo</h3>
-    @endunless
-@endisset --}}
-
-{{-- @switch($fornecedores[0]['status'])
-    @case('N')
-        <h3>Inativo</h3>
-        @break
-    @case('A')
-        <h3>Ativo</h3>
-        @break
-    @default
-        <h3>Status desconhecido</h3>
-        @break
-@endswitch --}}
-
-{{-- @for($i = 0; $i < count($fornecedores); $i++)
-    <hr>
-    Fornecedor: {{ $fornecedores[$i]['nome'] }}
-    <br>
-    Status: {{ $fornecedores[$i]['status'] }}
-    <br>
-    CNPJ: {{ $fornecedores[$i]['cnpj'] }}
-    <br>
-    <br>
-@endfor
-
-@for($i = 0; isset($fornecedores[$i]); $i++)
-    @switch($fornecedores[$i]['status'])
-        @case('N')
-            <h3>Inativo</h3>
-            @break
-        @case('A')
-            <h3>Ativo</h3>
-            @break
-        @default
-            <h3>Status desconhecido</h3>
-            @break
-    @endswitch
-@endfor --}}
-
-{{-- @foreach($fornecedores as $fornecedor) --}}
-{{-- @foreach($fornecedores as $indice => $fornecedor)
-    <hr>
-    Fornecedor: {{ $fornecedor['nome'] }}
-    <br>
-    Status: {{ $fornecedor['status'] }}
-    <br>
-    CNPJ: {{ $fornecedor['cnpj'] }}
-    <br>
-    <br>
-@endforeach --}}
-
-@forelse($fornecedores as $indice => $fornecedor)
-    Iteração atual: {{ $loop->iteration }}
-    <hr>
-    Fornecedor: @{{ $fornecedor['nome'] }}
-    <br>
-    Status: {{ $fornecedor['status'] }}
-    <br>
-    CNPJ: {{ $fornecedor['cnpj'] }}
-    <br>
-    <br>
-@empty
-    <p>Não existem fornecedores cadastrados</p>
-@endforelse
-
+@section('conteudo')
+    <div class="conteudo-pagina">
+        <div class="titulo-pagina-2">
+            <p>Fornecedor</p>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="{{ route('app.fornecedor.adicionar') }}">Novo</a></li>
+                <li><a href="{{ route('app.fornecedor') }}">Consulta</a></li>
+            </ul>
+        </div>
+        <div class="informacao-pagina">
+            <div style="width:90%; margin-left:auto; margin-right:auto;">
+                <form action="{{ route('app.fornecedor.listar') }}" method="post">
+                    @csrf
+                    <input class="borda-preta" type="text" name="nome" placeholder="Nome" value="{{$request['nome'] ?? ''}}">
+                    <input class="borda-preta" type="text" name="site" placeholder="Site" value="{{$request['site'] ?? ''}}">
+                    <input class="borda-preta" type="text" name="uf" placeholder="UF" value="{{$request['uf'] ?? ''}}">
+                    <input class="borda-preta" type="text" name="email" placeholder="Email" value="{{$request['email'] ?? ''}}">
+                    <button type="submit" class="borda-preta">Pesquisar</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+@endsection

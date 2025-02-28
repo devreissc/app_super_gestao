@@ -12,21 +12,16 @@ class SiteContatoSeeder extends Seeder
      */
     public function run()
     {
-        // $contato = new SiteContato();
-        // $contato->nome = 'Sistema SG';
-        // $contato->telefone = '(11) 99999-8888';
-        // $contato->email = 'a@a.com';
-        // $contato->motivo_contato = 1;
-        // $contato->mensagem = 'Seja bem-vindo ao sistema Super Gestão';
-        // $contato->save();
 
-        // SiteContato::create([
-        //     'nome' => 'Financeiro',
-        //     'telefone' => '(11) 99999-7777',
-        //     'email' => 'b@b.com',
-        //     'motivo_contato' => 2,
-        //     'mensagem' => 'Financeiro - Não recebimento de fatura',
-        // ]);
+        /*
+        $contato = new SiteContato();
+        $contato->nome = 'Sistema SG';
+        $contato->telefone = '(11) 99999-8888';
+        $contato->email = 'contato@sg.com.br';
+        $contato->motivo_contato = 1;
+        $contato->mensagem = 'Seja bem-vindo ao sistema Super Gestão';
+        $contato->save();
+        */
 
         factory(SiteContato::class, 100)->create();
     }

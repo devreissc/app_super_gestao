@@ -7,10 +7,10 @@ use App\MotivoContato;
 
 class PrincipalController extends Controller
 {
-    public function principal(){
-        $motivo_contato = MotivoContato::all();
+    public function principal() {
 
-        return view('site.principal', ['titulo' => 'Principal', 'motivo_contato' => $motivo_contato]);
+        $motivo_contatos = MotivoContato::all();
+
+        return view('site.principal', ['motivo_contatos' => $motivo_contatos]);
     }
-
 }

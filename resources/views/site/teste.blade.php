@@ -1,3 +1,3 @@
-teste
-
-Soma: {{ $p1view + $p2view }}
+P1 = {{ $xyz }}
+<br />
+P1 = {{ $zzz }}

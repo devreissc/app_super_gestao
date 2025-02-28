@@ -5,6 +5,11 @@ use App\MotivoContato;
 
 class MotivoContatoSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
         MotivoContato::create(['motivo_contato' => 'Dúvida']);

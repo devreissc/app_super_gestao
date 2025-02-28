@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterFornecedoresNovaColunaSiteComAfter extends Migration
+class AlterFornecedoresNovasColunas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AlterFornecedoresNovaColunaSiteComAfter extends Migration
      */
     public function up()
     {
+        //
         Schema::table('fornecedores', function (Blueprint $table) {
-            $table->string('site',150)->after('nome')->nullable();
+            $table->string('uf', 2);
+            $table->string('email', 150);
         });
     }
 
@@ -26,7 +28,10 @@ class AlterFornecedoresNovaColunaSiteComAfter extends Migration
     public function down()
     {
         Schema::table('fornecedores', function (Blueprint $table) {
-            $table->dropColumn('site',150);
+            //para remover colunas
+            // $table->dropColumn('uf');
+            // $table->dropColumn('email');
+            $table->dropColumn(['uf', 'email']);
         });
     }
 }
