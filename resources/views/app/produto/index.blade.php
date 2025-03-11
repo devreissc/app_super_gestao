@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Fornecedor</th>
                             <th>Descrição</th>
                             <th>Peso</th>
                             <th>Criação</th>
@@ -36,6 +37,7 @@
                         @foreach ($produtos as $produto)
                             <tr>
                                 <td>{{ $produto->nome }}</td>
+                                <td>{{ $produto->fornecedor->nome }}</td>
                                 <td>{{ $produto->descricao }}</td>
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->created_at }}</td>

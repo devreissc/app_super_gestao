@@ -13,7 +13,7 @@ class ProdutoController extends Controller
 {
     public function index(Request $request)
     {
-        $produtos = Item::with(['itemDetalhe', 'unidade'])->paginate(10); // Paginação, entre parenteses pode-se passar a quantidade de itens por página, carregamento antecipado de dados (eager loading)
+        $produtos = Item::with(['produtoDetalhe', 'unidade', 'fornecedor'])->paginate(10); // Paginação, entre parenteses pode-se passar a quantidade de itens por página, carregamento antecipado de dados (eager loading)
 
 
         $request = $request->all();

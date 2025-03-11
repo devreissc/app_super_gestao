@@ -27,4 +27,11 @@ class Item extends Model
     {
         return $this->hasOne('App\ItemDetalhe', 'produto_id', 'id'); // 3º parâmetro é a chave estrangeira da tabela produtos_detalhes e 2º parâmetro é a chave primária da tabela produtos
     }
+
+    public function fornecedor()
+    {
+        // Relacionamento N:N
+        // Fazendo a relação entre a tabela de produtos e a tabela de fornecedores
+        return $this->belongsTo('App\Fornecedor');
+    }
 }
