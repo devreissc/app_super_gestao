@@ -39,10 +39,13 @@
                                 <td>{{ $produto->peso }}</td>
                                 <td>{{ $produto->created_at }}</td>
                                 <td>{{ $produto->updated_at }}</td>
-                                <td>{{ $produto->unidade_id }}</td>
-                                <td>{{ $produto->comprimento ?? '' }}</td>
+                                <td>{{ $produto->unidade->unidade }}</td>
+                                {{-- <td>{{ $produto->comprimento ?? '' }}</td>
                                 <td>{{ $produto->largura ?? '' }}</td>
-                                <td>{{ $produto->altura ?? '' }}</td>
+                                <td>{{ $produto->altura ?? '' }}</td> --}}
+                                <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+                                <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
+                                <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
                                 <td>Detalhes</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td>
