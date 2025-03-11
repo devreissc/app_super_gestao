@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Produto;
 use App\Unidade;
 use App\ProdutoDetalhe;
+use App\ItemDetalhe;
 
 class ProdutoDetalheController extends Controller
 {
@@ -54,10 +55,12 @@ class ProdutoDetalheController extends Controller
         //
     }
 
-    public function edit(ProdutoDetalhe $produtoDetalhe)
+    // public function edit(ProdutoDetalhe $produtoDetalhe)
+    public function edit($id)
     {
 
         // dd($produtoDetalhe); 
+        $produtoDetalhe = ItemDetalhe::find($id);
         $unidades = Unidade::all();
         $produtos = Produto::all();
 

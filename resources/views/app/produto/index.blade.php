@@ -44,6 +44,7 @@
                                 <td>{{ $produto->largura ?? '' }}</td>
                                 <td>{{ $produto->altura ?? '' }}</td> --}}
                                 <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+                                {{-- ->produtoDetalhe corresponde ao nome do método no relacionamento dentro do model --}}
                                 <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
                                 <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
                                 <td>Detalhes</td>
