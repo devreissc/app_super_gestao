@@ -60,7 +60,7 @@ class ProdutoDetalheController extends Controller
     {
 
         // dd($produtoDetalhe); 
-        $produtoDetalhe = ItemDetalhe::find($id);
+        $produtoDetalhe = ItemDetalhe::with(['Item'])->find($id);
         $unidades = Unidade::all();
         $produtos = Produto::all();
 
