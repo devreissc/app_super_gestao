@@ -25,9 +25,10 @@
                             <th>Criação</th>
                             <th>Atualização</th>
                             <th>Unidade</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>comprimento</th>
+                            <th>largura</th>
+                            <th>Altura</th>
+                            <th colspan="4">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,10 @@
                                 <td>{{ $produto->created_at }}</td>
                                 <td>{{ $produto->updated_at }}</td>
                                 <td>{{ $produto->unidade_id }}</td>
+                                <td>{{ $produto->comprimento ?? '' }}</td>
+                                <td>{{ $produto->largura ?? '' }}</td>
+                                <td>{{ $produto->altura ?? '' }}</td>
+                                <td>Detalhes</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td>
                                     <form id="form_{{$produto->id}}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">

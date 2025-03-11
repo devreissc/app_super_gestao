@@ -3,42 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $produtos = Produto::paginate(10); // Paginação, entre parenteses pode-se passar a quantidade de itens por página
 
         $request = $request->all();
 
+        foreach($produtos as $key => $produto){
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            if(!is_null($produtoDetalhe)){
+                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtoDetalhe->largura;
+                $produtos[$key]['altura'] = $produtoDetalhe->altura;
+            }
+        }
+
         return view('app.produto.index', compact('produtos','request'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $unidades = Unidade::all();
         return view('app.produto.create', compact('unidades'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $regras = [
@@ -64,23 +59,11 @@ class ProdutoController extends Controller
         return redirect()->route('produto.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function show(Produto $produto)
     {
         return view('app.produto.show', compact('produto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
@@ -88,13 +71,6 @@ class ProdutoController extends Controller
         // return view('app.produto.create', compact(['produto','unidades']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Produto $produto)
     {
         // put indica que a requisição deve atualizar todos os campos
@@ -137,12 +113,6 @@ class ProdutoController extends Controller
         return redirect()->route('produto.show', ['produto' => $produto->id]); 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Produto  $produto
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Produto $produto)
     {
         $produto->delete();
