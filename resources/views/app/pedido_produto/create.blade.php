@@ -29,6 +29,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Produto</th>
+                            <th>Data de criação</th>
+                            <th>Data de atualização</th>
+                            <th></th>
                             {{-- <th>Quantidade</th>
                             <th>Valor</th>
                             <th>Total</th> --}}
@@ -40,6 +43,15 @@
                             <tr>
                                 <td>{{ $produto->id }}</td>
                                 <td>{{ $produto->nome }}</td>
+                                <td>{{ $produto->pivot->created_at->format('d/m/Y') }}</td>
+                                <td>{{ $produto->pivot->updated_at->format('d/m/Y') }}</td>
+                                <td>
+                                    <form id="form_{{$produto->id}}_{{$pedido->id}}" method="post" action="{{ route('pedido-produto.destroy', ['pedido' => $pedido->id ,'produto' => $produto->id]) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <a href="#" onclick="document.getElementById('form_{{$produto->id}}_{{$pedido->id}}').submit()">Excluir</a>
+                                    </form>
+                                </td>
                                 {{-- <td>{{ $produto->pivot->quantidade }}</td>
                                 <td>{{ $produto->pivot->valor }}</td>
                                 <td>{{ $produto->pivot->valor * $produto->pivot->quantidade }}</td> --}}

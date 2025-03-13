@@ -24,11 +24,13 @@ class PedidoProdutoController extends Controller
     public function store(Request $request, Pedido $pedido)
     {
         $regras = [
-            'produto_id' => 'exists:produtos,id'
+            'produto_id' => 'exists:produtos,id',
+            'quantidade' => 'required'
         ];
 
         $feedback = [
-            'produto_id.exists' => 'O produto informado não existe'
+            'produto_id.exists' => 'O produto informado não existe',
+            'required' => 'O campo :attribute deve ser preenchido'
         ];
 
         $request->validate($regras, $feedback);
@@ -36,10 +38,30 @@ class PedidoProdutoController extends Controller
         $pedidoId = $pedido->id;
         $produtoId = $request->get('produto_id');
 
-        $pedidoProduto = new PedidoProduto();
-        $pedidoProduto->pedido_id = $pedidoId;
-        $pedidoProduto->produto_id = $produtoId;
-        $pedidoProduto->save();
+        // $pedidoProduto = new PedidoProduto();
+        // $pedidoProduto->pedido_id = $pedidoId;
+        // $pedidoProduto->produto_id = $produtoId;
+        // $pedidoProduto->save();
+
+        $pedido->produtos()->attach($produtoId, ['quantidade' => $request->get('quantidade')]); // attach() é usado para inserir dados na tabela de relacionamento
+
+        // $pedido->produtos()->attach([
+        //     $produtoId => ['quantidade' => $request->get('quantidade')],
+        //     $produtoId2 => ['quantidade' => $request->get('quantidade2')],
+        //     $produtoId3 => ['quantidade' => $request->get('quantidade3')],
+        // ]);
+
+        // // ou 
+
+        // $produtos = $request->get('produtos'); // Supondo que seja um array no request
+
+        // $dados = [];
+
+        // foreach ($produtos as $produtoId => $quantidade) {
+        //     $dados[$produtoId] = ['quantidade' => $quantidade];
+        // }
+
+        // $pedido->produtos()->attach($dados);
 
         return redirect()->route('pedido-produto.create', ['pedido' => $pedidoId]);
     }
@@ -56,7 +78,21 @@ class PedidoProdutoController extends Controller
     {
     }
 
-    public function destroy($id)
+    public function destroy(Pedido $pedido, Produto $produto)
     {
+        // print_r($pedido->getAttributes());
+        // echo '<hr>';
+        // print_r($produto->getAttributes());
+
+        // forma 1
+        // PedidoProduto::where([
+        //     'pedido_id' => $pedido->id,
+        //     'produto_id' => $produto->id
+        // ])->delete();
+
+        //forma detach
+        $pedido->produtos()->detach($produto->id);
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
     }
 }

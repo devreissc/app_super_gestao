@@ -30,7 +30,7 @@
                             <th>comprimento</th>
                             <th>largura</th>
                             <th>Altura</th>
-                            <th colspan="4">Ações</th>
+                            <th colspan="3">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +43,10 @@
                                 <td>{{ $produto->created_at }}</td>
                                 <td>{{ $produto->updated_at }}</td>
                                 <td>{{ $produto->unidade->unidade }}</td>
-                                {{-- <td>{{ $produto->comprimento ?? '' }}</td>
-                                <td>{{ $produto->largura ?? '' }}</td>
-                                <td>{{ $produto->altura ?? '' }}</td> --}}
                                 <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
                                 {{-- ->produtoDetalhe corresponde ao nome do método no relacionamento dentro do model --}}
                                 <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
                                 <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
-                                <td>Detalhes</td>
                                 <td><a href="{{ route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                                 <td>
                                     <form id="form_{{$produto->id}}" method="post" action="{{ route('produto.destroy', ['produto' => $produto->id]) }}">
@@ -60,6 +56,15 @@
                                     </form>
                                 </td>
                                 <td><a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="13">
+                                    <p>Pedidos</p>
+                                    @foreach ($produto->pedidos as $pedido)
+                                        <p>Id: {{ $pedido->id }} | Cliente: {{ $pedido->cliente_id }} | Data: {{ $pedido->data_pedido }}</p><a href="{{ route('pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar Produto</a>
+                                    @endforeach
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
