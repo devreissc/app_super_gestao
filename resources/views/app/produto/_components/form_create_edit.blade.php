@@ -3,6 +3,13 @@
         @method("PUT")
     @endif
     @csrf
+    <select name="fornecedor_id">
+        <option value="">Selecione o fornecedor</option>
+        @foreach($fornecedores as $fornecedor)
+            <option value="{{ $fornecedor->id }}" {{ ($produto->fornecedor_id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : '' }} >{{ $fornecedor->nome }}</option>
+        @endforeach
+    </select>
+    {{ $errors->has('fornecedor_id') ? $errors->first('fornecedor_id') : '' }}
     <input class="borda-preta" type="text" name="nome" placeholder="Nome" value="{{ $produto->nome ?? old('nome') }}">
     {{ $errors->has('nome') ? $errors->first('nome') : '' }}
     <input class="borda-preta" type="text" name="descricao" placeholder="Descrição" value="{{ $produto->descricao ?? old('descricao') }}">

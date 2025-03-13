@@ -7,6 +7,7 @@ use App\ProdutoDetalhe;
 use App\Unidade;
 use App\Item;
 use App\ItemDetalhe;
+use App\Fornecedor;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -34,7 +35,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', compact('unidades'));
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', compact(['unidades','fornecedores']));
     }
 
     public function store(Request $request)
@@ -43,7 +45,8 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3|max:40|unique:produtos', // Verifica se o campo é obrigatório, se tem no mínimo 3 e no máximo 40 caracteres e se é único na tabela produtos
             'descricao' => 'required|min:3|max:2000', // Verifica se o campo é obrigatório e se tem no mínimo 3 e no máximo 2000 caracteres
             'peso' => 'required|integer', // Verifica se é um número inteiro
-            'unidade_id' => 'exists:unidades,id' // Verifica se o id existe na tabela unidades
+            'unidade_id' => 'exists:unidades,id', // Verifica se o id existe na tabela unidades
+            'fornecedor_id' => 'exists:fornecedores,id' // Verifica se o id existe na tabela fornecedores
         ];
 
         $feedback = [
@@ -57,24 +60,25 @@ class ProdutoController extends Controller
 
         $request->validate($regras, $feedback);
 
-        Produto::create($request->all());
+        Item::create($request->all());
 
         return redirect()->route('produto.index');
     }
 
-    public function show(Produto $produto)
+    public function show(Item $produto)
     {
         return view('app.produto.show', compact('produto'));
     }
 
-    public function edit(Produto $produto)
+    public function edit(Item $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', compact(['produto','unidades']));
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit', compact(['produto','unidades','fornecedores']));
         // return view('app.produto.create', compact(['produto','unidades']));
     }
 
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Item $produto)
     {
         // put indica que a requisição deve atualizar todos os campos
         // patch indica que a requisição deve atualizar apenas os campos que foram enviados
@@ -93,12 +97,13 @@ class ProdutoController extends Controller
         // print_r($produto); 
         // echo '<br><br><br><br>';
         // print_r($produto->getAttributes()); 
-
+        // dd($request->all());
         $regras = [
             'nome' => 'required|min:3|max:40|unique:produtos,nome,'.$produto->id, // Verifica se o campo é obrigatório, se tem no mínimo 3 e no máximo 40 caracteres e se é único na tabela produtos
             'descricao' => 'required|min:3|max:2000', // Verifica se o campo é obrigatório e se tem no mínimo 3 e no máximo 2000 caracteres
             'peso' => 'required|integer', // Verifica se é um número inteiro
-            'unidade_id' => 'exists:unidades,id' // Verifica se o id existe na tabela unidades
+            'unidade_id' => 'exists:unidades,id', // Verifica se o id existe na tabela unidades
+            'fornecedor_id' => 'exists:fornecedores,id' // Verifica se o id existe na tabela fornecedores
         ];
 
         $feedback = [
