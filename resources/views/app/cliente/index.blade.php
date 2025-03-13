@@ -21,15 +21,18 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th colspan="4">Ações</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th colspan="3">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($clientes as $cliente)
                             <tr>
                                 <td>{{ $cliente->nome }}</td>
+                                <td>{{ $cliente->telefone }}</td>
+                                <td>{{ $cliente->email }}</td>
                                 
-                                <td>Detalhes</td>
                                 <td><a href="{{ route('cliente.show', ['cliente' => $cliente->id]) }}">Visualizar</a></td>
                                 <td>
                                     <form id="form_{{$cliente->id}}" method="post" action="{{ route('cliente.destroy', ['cliente' => $cliente->id]) }}">

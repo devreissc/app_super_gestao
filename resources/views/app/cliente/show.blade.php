@@ -1,16 +1,16 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Produto')
+@section('titulo', 'Cliente')
 
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Visualizar produto</p>
+            <p>Visualizar cliente</p>
 
         </div>
         <div class="menu">
             <ul>
-                <li><a href="{{ route('produto.index') }}">Voltar</a></li>
+                <li><a href="{{ route('cliente.index') }}">Voltar</a></li>
                 <li><a href="">Consulta</a></li>
             </ul>
         </div>
@@ -21,22 +21,20 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Descrição</th>
-                            <th>Peso</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
                             <th>Criação</th>
                             <th>Atualização</th>
-                            <th>Unidade</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $produto->id }}</td>
-                            <td>{{ $produto->nome }}</td>
-                            <td>{{ $produto->descricao }}</td>
-                            <td>{{ $produto->peso }}</td>
-                            <td>{{ $produto->created_at }}</td>
-                            <td>{{ $produto->updated_at }}</td>
-                            <td>{{ $produto->unidade_id }}</td>
+                            <td>{{ $cliente->id }}</td>
+                            <td>{{ $cliente->nome }}</td>
+                            <td>{{ $cliente->telefone }}</td>
+                            <td>{{ $cliente->email }}</td>
+                            <td>{{ $cliente->created_at }}</td>
+                            <td>{{ $cliente->updated_at }}</td>
                         </tr>
                     </tbody>
             </div>
