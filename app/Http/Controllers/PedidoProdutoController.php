@@ -78,21 +78,28 @@ class PedidoProdutoController extends Controller
     {
     }
 
-    public function destroy(Pedido $pedido, Produto $produto)
+    // public function destroy(Pedido $pedido, Produto $produto)
+    // {
+    //     // print_r($pedido->getAttributes());
+    //     // echo '<hr>';
+    //     // print_r($produto->getAttributes());
+
+    //     // forma 1
+    //     // PedidoProduto::where([
+    //     //     'pedido_id' => $pedido->id,
+    //     //     'produto_id' => $produto->id
+    //     // ])->delete();
+
+    //     //forma detach
+    //     $pedido->produtos()->detach($produto->id);
+
+    //     return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
+    // }
+
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        // print_r($pedido->getAttributes());
-        // echo '<hr>';
-        // print_r($produto->getAttributes());
+        $pedidoProduto->delete();
 
-        // forma 1
-        // PedidoProduto::where([
-        //     'pedido_id' => $pedido->id,
-        //     'produto_id' => $produto->id
-        // ])->delete();
-
-        //forma detach
-        $pedido->produtos()->detach($produto->id);
-
-        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
     }
 }
